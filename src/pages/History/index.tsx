@@ -20,37 +20,34 @@ export const History = () => {
             </tr>
           </thead>
           <tbody>
-            {' '}
             {cycles.map((cycle) => {
               return (
                 <tr key={cycle.id}>
                   <td>{cycle.task}</td>
                   <td>{cycle.minutesAmount}</td>
                   <td>
-                    {formatDistanceToNow(cycle.startDate, {
+                    {formatDistanceToNow(new Date(cycle.startDate), {
                       addSuffix: true,
                       locale: ptBR,
                     })}
                   </td>
-                  <td>
-                    {cycle.finishedDate && (
-                      <td>
-                        <Status statusColor="green">Concluído</Status>
-                      </td>
-                    )}
+                  {cycle.finishedDate && (
+                    <td>
+                      <Status statusColor="green">Concluído</Status>
+                    </td>
+                  )}
 
-                    {cycle.interruptedDate && (
-                      <td>
-                        <Status statusColor="red">Interrompido</Status>
-                      </td>
-                    )}
+                  {cycle.interruptedDate && (
+                    <td>
+                      <Status statusColor="red">Interrompido</Status>
+                    </td>
+                  )}
 
-                    {!cycle.finishedDate && !cycle.interruptedDate && (
-                      <td>
-                        <Status statusColor="yellow">Em andamento</Status>
-                      </td>
-                    )}
-                  </td>
+                  {!cycle.finishedDate && !cycle.interruptedDate && (
+                    <td>
+                      <Status statusColor="yellow">Em andamento</Status>
+                    </td>
+                  )}
                 </tr>
               )
             })}
